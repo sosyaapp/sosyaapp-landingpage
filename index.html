@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOSYA - Chat and Travel Experience</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* --- FONT SETUP (ZALANDO) --- */
+        @import url('https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap');
+
+        body {
+            font-family: 'Zalando Sans Expanded', sans-serif;
+            background-color: #F8FAFC;
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+
+        :root {
+            --sosya-blue: #005EA8;
+            --sosya-cyan: #00AEEF;
+        }
+
+        /* --- MESH GRADIENT BACKGROUND --- */
+        .mesh-bg {
+            background-color: #ffffff;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(206,100%,70%,0.2) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(190,100%,70%,0.2) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(206,100%,90%,0.2) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(190,100%,90%,0.2) 0px, transparent 50%);
+        }
+
+        /* --- UTILITIES --- */
+        .text-gradient {
+            background: linear-gradient(135deg, #005EA8 0%, #00AEEF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bento-card {
+            background: rgba(255, 255, 255, 0.7);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .bento-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -5px rgba(0, 94, 168, 0.1);
+            border-color: rgba(0, 174, 239, 0.3);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background-color: var(--sosya-cyan);
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .screen-content { transition: opacity 0.4s ease, transform 0.4s ease; }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sosya: {
+                            blue: '#005EA8',
+                            cyan: '#00AEEF',
+                            dark: '#0f172a',
+                            light: '#E6F7FF'
+                        }
+                    },
+                    boxShadow: {
+                        'glow': '0 0 15px rgba(0, 174, 239, 0.2)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="mesh-bg text-slate-800">
+
+    <nav class="fixed w-full z-50 bg-white/70 backdrop-blur-xl border-b border-white/40 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-2">
+                <img src="images/SOSYA LOGO VERTICAL.png" alt="Logo SOSYA" class="h-6 md:h-8 w-auto object-contain">
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-1 font-medium text-sm text-slate-500 bg-slate-100/50 p-1 rounded-full border border-white/50 backdrop-blur-md">
+                <a href="#home" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-sosya-blue hover:shadow-sm transition-all duration-300">Home</a>
+                <a href="#demo" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-sosya-blue hover:shadow-sm transition-all duration-300">Experience</a>
+                <a href="#showcase" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-sosya-blue hover:shadow-sm transition-all duration-300">Showcase</a>
+                <a href="#fitur" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-sosya-blue hover:shadow-sm transition-all duration-300">Fitur</a>
+            </div>
+
+            <a href="#download" class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs md:text-sm px-4 md:px-5 py-2 md:py-2.5 rounded-full font-bold hover:bg-sosya-blue hover:shadow-glow transition-all duration-300 transform hover:-translate-y-0.5">
+                Download App
+            </a>
+        </div>
+    </nav>
+
+    <header id="home" class="pt-28 pb-16 md:pt-36 md:pb-20 relative overflow-hidden min-h-[90vh] flex items-center">
+        <div class="absolute top-0 right-0 w-[500px] md:w-[800px] h-[500px] md:h-[800px] bg-gradient-to-b from-blue-100/40 to-cyan-100/40 rounded-full blur-3xl -z-10 translate-x-1/3 -translate-y-1/4"></div>
+        
+        <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <div data-aos="fade-up" data-aos-duration="1000" class="text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-blue-100 text-sosya-blue text-[10px] md:text-xs font-bold uppercase tracking-widest mb-6 shadow-sm">
+                    <span class="w-1.5 h-1.5 rounded-full bg-sosya-cyan animate-pulse"></span>
+                    Super App for Travelers
+                </div>
+                
+                <h1 class="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight mb-4 text-slate-900 tracking-tight">
+                    Chat, Travel,<br>
+                    <span class="text-gradient" id="typewriter"></span><span class="cursor"></span>
+                </h1>
+                
+                <p class="text-slate-500 text-base md:text-lg mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0 font-light">
+                    Gabungkan pesan instan, komunitas lokal, dan booking perjalanan. <span class="font-semibold text-slate-800">Semua dalam satu aplikasi.</span>
+                </p>
+
+                <div class="flex flex-wrap justify-center lg:justify-start gap-3">
+                    <button class="bg-slate-900 text-white px-6 py-3 rounded-xl font-bold text-xs md:text-sm hover:scale-105 transition duration-300 flex items-center gap-3 shadow-xl shadow-slate-900/20">
+                        <i class="fa-brands fa-apple text-lg"></i> 
+                        <div class="text-left leading-tight">
+                            <span class="block text-[9px] font-normal opacity-70">Download on the</span>
+                            App Store
+                        </div>
+                    </button>
+                    <button class="bg-white border border-slate-200 text-slate-800 px-6 py-3 rounded-xl font-bold text-xs md:text-sm hover:border-sosya-blue hover:text-sosya-blue transition duration-300 flex items-center gap-3 shadow-lg shadow-slate-200/50">
+                        <i class="fa-brands fa-google-play text-lg"></i>
+                         <div class="text-left leading-tight">
+                            <span class="block text-[9px] font-normal opacity-70">Get it on</span>
+                            Google Play
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="relative flex justify-center lg:justify-end mt-8 lg:mt-0" data-aos="fade-left" data-aos-delay="200">
+                <div class="relative z-10 animate-float w-3/4 md:w-auto">
+                    <img src="images/UI.png" alt="SOSYA UI" class="drop-shadow-2xl md:scale-110">
+                </div>
+                
+                <div class="absolute top-1/3 -left-8 bg-white/80 backdrop-blur-md p-3 rounded-xl shadow-xl border border-white/50 animate-float-delayed z-20 hidden md:block w-40">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-sosya-blue to-sosya-cyan flex items-center justify-center text-white text-xs">
+                            <i class="fa-solid fa-plane"></i>
+                        </div>
+                        <div>
+                            <p class="text-[9px] text-slate-500 font-bold uppercase">Flight Booked</p>
+                            <p class="text-[10px] font-bold text-slate-800">CGK <i class="fa-solid fa-arrow-right text-[8px] mx-1"></i> DPS</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="demo" class="py-16 md:py-24 relative">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="text-sosya-blue font-bold text-[10px] uppercase tracking-widest py-1 px-3 rounded-md bg-blue-50">Interactive Demo</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-3 tracking-tight">Satu Aplikasi, Dua Dunia.</h2>
+                <p class="text-slate-500 text-sm md:text-base">Klik tombol di bawah untuk melihat transisi mulus antara mode Chat & Travel.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
+                
+                <div class="space-y-4 md:space-y-6 order-2 lg:order-1">
+                    <div onclick="switchMode('chat')" id="btn-chat" class="cursor-pointer group p-6 md:p-8 rounded-3xl bg-white border border-slate-100 shadow-xl shadow-slate-200/40 hover:border-sosya-blue/30 hover:shadow-sosya-blue/10 transition-all duration-300 ring-2 ring-transparent ring-offset-4 ring-offset-transparent">
+                        <div class="flex items-center gap-4 md:gap-6">
+                            <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-blue-50 text-sosya-blue flex items-center justify-center text-xl md:text-2xl group-hover:scale-110 group-hover:rotate-6 transition duration-300">
+                                <i class="fa-regular fa-comments"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg md:text-xl font-bold text-slate-800 group-hover:text-sosya-blue transition">Social Mode</h3>
+                                <p class="text-slate-500 mt-1 text-xs md:text-sm leading-relaxed">Berinteraksi dengan komunitas, update status, dan chat.</p>
+                            </div>
+                            <i class="fa-solid fa-chevron-right ml-auto text-slate-300 group-hover:text-sosya-blue transition text-sm"></i>
+                        </div>
+                    </div>
+
+                    <div onclick="switchMode('travel')" id="btn-travel" class="cursor-pointer group p-6 md:p-8 rounded-3xl bg-slate-50 border border-transparent hover:bg-white hover:border-sosya-cyan/30 hover:shadow-xl hover:shadow-sosya-cyan/10 transition-all duration-300">
+                        <div class="flex items-center gap-4 md:gap-6">
+                            <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-cyan-50 text-sosya-cyan flex items-center justify-center text-xl md:text-2xl group-hover:scale-110 group-hover:-rotate-6 transition duration-300">
+                                <i class="fa-solid fa-plane-departure"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg md:text-xl font-bold text-slate-800 group-hover:text-sosya-cyan transition">Travel Mode</h3>
+                                <p class="text-slate-500 mt-1 text-xs md:text-sm leading-relaxed">Booking tiket pesawat, kereta, hotel, hingga ojek online.</p>
+                            </div>
+                            <i class="fa-solid fa-chevron-right ml-auto text-slate-300 group-hover:text-sosya-cyan transition text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-center order-1 lg:order-2">
+                    <div class="relative w-[260px] md:w-[300px] h-[520px] md:h-[600px] bg-slate-900 rounded-[2.5rem] md:rounded-[3rem] border-[8px] md:border-[10px] border-slate-900 shadow-2xl overflow-hidden ring-4 ring-slate-200">
+                        <div id="screen-display" class="w-full h-full bg-white relative">
+                            <div id="content-chat" class="absolute inset-0 bg-white p-5 pt-12 screen-content flex flex-col">
+                                <div class="flex justify-between items-center mb-6">
+                                    <h4 class="font-bold text-xl md:text-2xl text-sosya-dark">Chats</h4>
+                                    <div class="w-8 h-8 rounded-full bg-blue-50 text-sosya-blue flex items-center justify-center"><i class="fa-solid fa-pen"></i></div>
+                                </div>
+                                <div class="space-y-6">
+                                    <div class="flex gap-3">
+                                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-pink-400"></div>
+                                        <div class="bg-gray-100 p-3 rounded-2xl rounded-tl-none text-xs text-slate-600 w-2/3">
+                                            Liburan ke Bali jadi minggu depan?
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-3 flex-row-reverse">
+                                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-cyan-400"></div>
+                                        <div class="bg-sosya-blue text-white p-3 rounded-2xl rounded-tr-none text-xs w-2/3 shadow-lg shadow-blue-500/20">
+                                            Yoi, tiket udah gue amanin via SOSYA nih.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="content-travel" class="absolute inset-0 bg-slate-50 p-5 pt-12 screen-content opacity-0 translate-y-10 pointer-events-none">
+                                <div class="flex justify-between items-center mb-6">
+                                    <h4 class="font-bold text-xl md:text-2xl text-sosya-dark">Explore</h4>
+                                    <div class="w-8 h-8 rounded-full bg-cyan-50 text-sosya-cyan flex items-center justify-center"><i class="fa-solid fa-globe"></i></div>
+                                </div>
+                                <div class="grid grid-cols-4 gap-2 mb-6">
+                                    <div class="aspect-square bg-white rounded-2xl flex flex-col items-center justify-center shadow-sm text-sosya-blue"><i class="fa-solid fa-plane mb-1"></i><span class="text-[8px] font-bold">Flight</span></div>
+                                    <div class="aspect-square bg-white rounded-2xl flex flex-col items-center justify-center shadow-sm text-orange-500"><i class="fa-solid fa-train mb-1"></i><span class="text-[8px] font-bold">Train</span></div>
+                                    <div class="aspect-square bg-white rounded-2xl flex flex-col items-center justify-center shadow-sm text-green-600"><i class="fa-solid fa-motorcycle mb-1"></i><span class="text-[8px] font-bold">Ojek</span></div>
+                                    <div class="aspect-square bg-white rounded-2xl flex flex-col items-center justify-center shadow-sm text-purple-600"><i class="fa-solid fa-hotel mb-1"></i><span class="text-[8px] font-bold">Hotel</span></div>
+                                </div>
+                                <div class="bg-white p-4 rounded-3xl shadow-lg border border-slate-100">
+                                    <div class="flex justify-between mb-4">
+                                        <div><p class="text-[10px] text-gray-400">From</p><p class="font-bold text-lg">JKT</p></div>
+                                        <div class="flex items-center text-gray-300"><i class="fa-solid fa-plane"></i></div>
+                                        <div class="text-right"><p class="text-[10px] text-gray-400">To</p><p class="font-bold text-lg">DPS</p></div>
+                                    </div>
+                                    <button class="w-full py-3 bg-gradient-to-r from-sosya-blue to-sosya-cyan text-white rounded-xl font-bold text-sm shadow-lg shadow-cyan-500/30">Search Flights</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="showcase" class="py-16 md:py-32 bg-white rounded-t-[3rem] shadow-inner border-t border-slate-100">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 md:mb-24" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Deep Dive into SOSYA</h2>
+                <p class="text-slate-500 mt-3 md:mt-4 max-w-2xl mx-auto text-sm md:text-base">Fitur canggih yang didesain simpel. Gak perlu gonta-ganti aplikasi.</p>
+            </div>
+    
+            <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16 mb-20 md:mb-32 group">
+                <div class="w-full md:w-1/2" data-aos="fade-right">
+                    <span class="w-12 h-12 flex items-center justify-center bg-blue-100 text-sosya-blue rounded-2xl text-xl mb-4 md:mb-6"><i class="fa-solid fa-fingerprint"></i></span>
+                    <h3 class="text-2xl md:text-3xl font-bold text-slate-800 mb-4 group-hover:text-sosya-blue transition-colors">Feed Interaktif: Tap & Copy</h3>
+                    <p class="text-slate-500 leading-relaxed text-sm md:text-lg">Liat teman posting liburan seru? Langsung klik fotonya buat liat detail penerbangan dan hotel. Suka rencananya? Salin ke itinerary lu cuma dengan sekali klik.</p>
+                </div>
+                <div class="w-full md:w-1/2 relative" data-aos="fade-left">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-blue-200 to-cyan-200 rounded-full blur-[60px] md:blur-[80px] opacity-40"></div>
+                    <img src="images/UI flight.png" class="relative z-10 w-full max-w-xs md:max-w-sm mx-auto drop-shadow-2xl rounded-[2rem] border-4 border-white transform group-hover:scale-105 transition duration-500" alt="Feed Interactive">
+                </div>
+            </div>
+
+             <div class="flex flex-col md:flex-row-reverse items-center gap-10 md:gap-16 mb-20 md:mb-32 group">
+                <div class="w-full md:w-1/2" data-aos="fade-left">
+                     <span class="w-12 h-12 flex items-center justify-center bg-cyan-100 text-sosya-cyan rounded-2xl text-xl mb-4 md:mb-6"><i class="fa-solid fa-shield-halved"></i></span>
+                    <h3 class="text-2xl md:text-3xl font-bold text-slate-800 mb-4 group-hover:text-sosya-cyan transition-colors">Lingkaran: Komunitas Anti-Hoax</h3>
+                    <p class="text-slate-500 leading-relaxed text-sm md:text-lg">Akses komunitas lokal yang terkunci. Cuma bisa dibuka kalau GPS mendeteksi lu ada di lokasi atau punya tiket valid. Review dijamin 100% no tipu-tipu.</p>
+                </div>
+                <div class="w-full md:w-1/2 relative" data-aos="fade-right">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-cyan-200 to-green-200 rounded-full blur-[60px] md:blur-[80px] opacity-40"></div>
+                    <img src="images/UI Circle.png" class="relative z-10 w-full max-w-xs md:max-w-sm mx-auto drop-shadow-2xl rounded-[2rem] border-4 border-white transform group-hover:scale-105 transition duration-500" alt="Lingkaran">
+                </div>
+            </div>
+
+             <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16 group">
+                <div class="w-full md:w-1/2" data-aos="fade-right">
+                     <span class="w-12 h-12 flex items-center justify-center bg-orange-100 text-orange-500 rounded-2xl text-xl mb-4 md:mb-6"><i class="fa-solid fa-map-location"></i></span>
+                    <h3 class="text-2xl md:text-3xl font-bold text-slate-800 mb-4 group-hover:text-orange-500 transition-colors">Mobilitas Tanpa Batas</h3>
+                    <p class="text-slate-500 leading-relaxed text-sm md:text-lg">Gak perlu download aplikasi taksi lokal lagi pas traveling. Pesan tiket pesawat sampai Ojek Online buat jalan-jalan di kota tujuan, semua ada di SOSYA.</p>
+                </div>
+                <div class="w-full md:w-1/2 relative" data-aos="fade-left">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-orange-200 to-yellow-200 rounded-full blur-[60px] md:blur-[80px] opacity-40"></div>
+                    <img src="images/UI CnB.png" class="relative z-10 w-full max-w-xs md:max-w-sm mx-auto drop-shadow-2xl rounded-[2rem] border-4 border-white transform group-hover:scale-105 transition duration-500" alt="Mobility">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="fitur" class="py-20 md:py-32">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">The SOSYA Way</h2>
+                <p class="text-slate-500 text-base md:text-lg">Lima pilar ekosistem kami.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-auto">
+                
+                <div class="bento-card col-span-1 md:col-span-2 lg:col-span-2 md:row-span-2 p-8 md:p-10 rounded-[2rem] flex flex-col justify-between group" data-aos="fade-up">
+                    <div>
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-blue-100 rounded-full flex items-center justify-center text-sosya-blue text-xl md:text-2xl mb-6 group-hover:scale-110 transition"><i class="fa-solid fa-share-nodes"></i></div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-slate-800 mb-2">Share Moments</h3>
+                        <p class="text-slate-500 text-sm md:text-lg">Berbagi momen seru secara instan lewat Chat atau Feed komunitas yang terintegrasi.</p>
+                    </div>
+                    <div class="mt-8 flex gap-2">
+                        <span class="w-full h-24 md:h-32 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl opacity-80 group-hover:opacity-100 transition"></span>
+                        <span class="w-1/2 h-24 md:h-32 bg-slate-100 rounded-2xl"></span>
+                    </div>
+                </div>
+
+                <div class="bento-card col-span-1 md:col-span-1 lg:col-span-1 md:row-span-2 p-8 rounded-[2rem] flex flex-col items-center text-center justify-center group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-cyan-100 rounded-full flex items-center justify-center text-sosya-cyan text-2xl md:text-3xl mb-6 group-hover:rotate-12 transition"><i class="fa-solid fa-layer-group"></i></div>
+                    <h3 class="text-xl md:text-2xl font-bold text-slate-800 mb-4">One-stop</h3>
+                    <p class="text-slate-500 text-sm mb-6">Chat, booking, review. Gak perlu pindah aplikasi.</p>
+                    <div class="w-full h-32 md:h-40 bg-slate-100 rounded-2xl relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&q=80')] bg-cover opacity-50 group-hover:scale-110 transition duration-700"></div>
+                    </div>
+                </div>
+
+                <div class="bento-card col-span-1 p-8 rounded-[2rem] group hover:bg-purple-50 transition" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fa-solid fa-camera-retro text-2xl md:text-3xl text-purple-500 mb-4 group-hover:scale-110 block transition"></i>
+                    <h3 class="text-lg md:text-xl font-bold text-slate-800">Stories</h3>
+                    <p class="text-slate-500 text-sm mt-2">Visual storytelling yang inspiratif.</p>
+                </div>
+
+                <div class="bento-card col-span-1 p-8 rounded-[2rem] group hover:bg-orange-50 transition" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fa-solid fa-fingerprint text-2xl md:text-3xl text-orange-500 mb-4 group-hover:scale-110 block transition"></i>
+                    <h3 class="text-lg md:text-xl font-bold text-slate-800">Personalized</h3>
+                    <p class="text-slate-500 text-sm mt-2">Gaya travel yang "kamu banget".</p>
+                </div>
+
+                <div class="bento-card col-span-1 md:col-span-3 lg:col-span-4 p-8 md:p-10 rounded-[2rem] flex items-center justify-between group overflow-hidden relative" data-aos="fade-up" data-aos-delay="400">
+                    <div class="relative z-10 max-w-xl">
+                        <div class="flex items-center gap-4 mb-4">
+                            <i class="fa-solid fa-compass text-2xl md:text-3xl text-green-600"></i>
+                            <h3 class="text-2xl md:text-3xl font-bold text-slate-800">Adventure</h3>
+                        </div>
+                        <p class="text-slate-500 text-base md:text-lg">Jelajahi dunia dan temukan petualangan baru di setiap langkah bersama SOSYA.</p>
+                    </div>
+                    <div class="absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-green-100 to-transparent opacity-50"></div>
+                    <i class="fa-solid fa-map absolute -right-10 -bottom-10 text-[150px] md:text-[200px] text-green-500/10 rotate-12 group-hover:rotate-0 transition duration-700"></i>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, offset: 50, duration: 1000 });
+
+        // Typewriter Modern
+        const words = ["Tanpa Batas.", "Lebih Mudah.", "Satu Aplikasi."];
+        let i = 0;
+        function typeWriter() {
+            const element = document.getElementById("typewriter");
+            const word = words[i];
+            let c = 0;
+            const typing = setInterval(() => {
+                element.textContent = word.substring(0, c + 1);
+                c++;
+                if (c === word.length) {
+                    clearInterval(typing);
+                    setTimeout(() => {
+                        const deleting = setInterval(() => {
+                            element.textContent = word.substring(0, c - 1);
+                            c--;
+                            if (c === 0) {
+                                clearInterval(deleting);
+                                i = (i + 1) % words.length;
+                                setTimeout(typeWriter, 200);
+                            }
+                        }, 50);
+                    }, 2000);
+                }
+            }, 100);
+        }
+        document.addEventListener('DOMContentLoaded', typeWriter);
+
+        // Switch Mode Logic
+        function switchMode(mode) {
+            const contentChat = document.getElementById('content-chat');
+            const contentTravel = document.getElementById('content-travel');
+            const btnChat = document.getElementById('btn-chat');
+            const btnTravel = document.getElementById('btn-travel');
+
+            if (mode === 'chat') {
+                contentChat.style.opacity = '1'; contentChat.style.transform = 'translateY(0)';
+                contentTravel.style.opacity = '0'; contentTravel.style.transform = 'translateY(20px)';
+                btnChat.classList.add('ring-2', 'ring-sosya-blue');
+                btnTravel.classList.remove('ring-2', 'ring-sosya-cyan');
+            } else {
+                contentTravel.style.opacity = '1'; contentTravel.style.transform = 'translateY(0)';
+                contentTravel.style.pointerEvents = 'auto';
+                contentChat.style.opacity = '0'; contentChat.style.transform = 'translateY(-20px)';
+                btnTravel.classList.add('ring-2', 'ring-sosya-cyan');
+                btnChat.classList.remove('ring-2', 'ring-sosya-blue');
+            }
+        }
+    </script>
+</body>
+</html>
