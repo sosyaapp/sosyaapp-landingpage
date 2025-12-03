@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Kami - PT ARTHA INTERKOM TEKNOLOGI</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* --- FONT SETUP (ZALANDO) --- */
+        @import url('https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap');
+
+        body {
+            font-family: 'Zalando Sans Expanded', sans-serif;
+            background-color: #F8FAFC;
+            color: #0f172a;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        :root {
+            --sosya-blue: #005EA8;
+            --sosya-cyan: #00AEEF;
+        }
+
+        /* --- MESH GRADIENT BACKGROUND --- */
+        .mesh-bg {
+            background-color: #ffffff;
+            background-image:
+                radial-gradient(at 0% 0%, hsla(206, 100%, 70%, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(190, 100%, 70%, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(206, 100%, 90%, 0.1) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(190, 100%, 90%, 0.1) 0px, transparent 50%);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #005EA8 0%, #00AEEF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bento-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .bento-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -5px rgba(0, 94, 168, 0.1);
+            border-color: rgba(0, 174, 239, 0.3);
+        }
+
+        /* SIDEBAR TRANSITION */
+        .sidebar-transition {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sosya: {
+                            blue: '#005EA8',
+                            cyan: '#00AEEF',
+                            dark: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="mesh-bg text-slate-800">
+
+    <nav class="fixed w-full z-50 bg-white/70 backdrop-blur-xl border-b border-white/40 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center relative">
+            <a href="index.html" class="flex items-center gap-2">
+                <img src="images/SOSYA LOGO VERTICAL.png" alt="Logo SOSYA" class="h-6 md:h-8 w-auto object-contain">
+            </a>
+
+            <div class="hidden md:flex items-center space-x-1 font-medium text-sm text-slate-500 bg-slate-100/50 p-1 rounded-full border border-white/50 backdrop-blur-md">
+                <a href="index.html" class="px-5 py-2 rounded-full hover:bg-white hover:text-sosya-blue hover:shadow-sm transition-all duration-300">Beranda</a>
+                <a href="tentang.html" class="px-5 py-2 rounded-full bg-white text-sosya-blue shadow-sm transition-all duration-300">Tentang</a>
+                <a href="bantuan.html" class="px-5 py-2 rounded-full hover:bg-white hover:text-sosya-blue hover:shadow-sm transition-all duration-300">Pusat Bantuan</a>
+                <a href="#" class="px-5 py-2 rounded-full hover:bg-white hover:text-sosya-blue hover:shadow-sm transition-all duration-300">Guideline</a>
+            </div>
+
+            <div class="hidden md:block">
+                <a href="#" class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs md:text-sm px-5 py-2.5 rounded-full font-bold hover:bg-sosya-blue transition-all duration-300 transform hover:-translate-y-0.5">
+                    Hubungi Kami
+                </a>
+            </div>
+
+            <div class="md:hidden">
+                <button onclick="toggleSidebar()" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 hover:bg-sosya-blue hover:text-white transition-all text-slate-700">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-[60] hidden opacity-0 md:hidden transition-opacity"></div>
+    <div id="sidebar" class="fixed top-0 right-0 h-full w-[280px] bg-white z-[70] shadow-2xl sidebar-transition translate-x-full flex flex-col border-l border-slate-100 md:hidden">
+        <div class="p-6 flex justify-between items-center border-b border-slate-100">
+            <span class="font-bold text-lg text-sosya-blue">Menu</span>
+            <button onclick="toggleSidebar()" class="w-8 h-8 rounded-full bg-slate-50 text-slate-400 hover:text-red-500 flex items-center justify-center transition"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="flex-1 overflow-y-auto py-6 px-6 flex flex-col gap-2">
+            <a href="index.html" class="block px-4 py-3 rounded-xl hover:bg-blue-50 text-slate-600 font-medium">Beranda</a>
+            <a href="tentang.html" class="block px-4 py-3 rounded-xl bg-blue-50 text-sosya-blue font-bold">Tentang</a>
+            <a href="bantuan.html" class="block px-4 py-3 rounded-xl hover:bg-blue-50 text-slate-600 font-medium">Pusat Bantuan</a>
+            <a href="#" class="block px-4 py-3 rounded-xl hover:bg-blue-50 text-slate-600 font-medium">Guideline</a>
+        </div>
+    </div>
+
+    <header class="pt-32 pb-20 md:pt-48 md:pb-32 relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-blue-200/30 to-cyan-200/30 rounded-full blur-[100px] -z-10"></div>
+        
+        <div class="max-w-4xl mx-auto px-6 text-center" data-aos="fade-up">
+            <p class="text-sosya-blue font-bold text-xs md:text-sm tracking-[0.2em] uppercase mb-4">Innovating The Future</p>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900 mb-6 tracking-tight">
+                Membangun <span class="text-gradient">Ekosistem Digital</span> Tanpa Batas.
+            </h1>
+            <p class="text-slate-500 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
+                PT ARTHA INTERKOM TEKNOLOGI hadir untuk menjembatani kesenjangan antara interaksi sosial dan mobilitas fisik melalui kode, data, dan empati.
+            </p>
+        </div>
+    </header>
+
+    <section class="pb-24">
+        <div class="max-w-6xl mx-auto px-6">
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-24">
+                <div class="relative" data-aos="fade-right">
+                    <div class="aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white relative z-10">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop" alt="Team Working" class="object-cover w-full h-full hover:scale-105 transition duration-700">
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-slate-900 rounded-full flex items-center justify-center text-white z-20 animate-bounce shadow-xl">
+                        <div class="text-center">
+                            <span class="block text-2xl font-bold">2020</span>
+                            <span class="text-[10px] uppercase tracking-wider">Est.</span>
+                        </div>
+                    </div>
+                </div>
+                <div data-aos="fade-left">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6">Lebih Dari Sekadar Kode.</h2>
+                    <div class="space-y-4 text-slate-500 leading-relaxed text-justify">
+                        <p>
+                            Berawal dari sebuah garasi kecil di pinggiran Jakarta, <strong>PT ARTHA INTERKOM TEKNOLOGI</strong> didirikan dengan satu visi sederhana: Mengapa merencanakan perjalanan harus begitu sepi?
+                        </p>
+                        <p>
+                            Kami percaya teknologi seharusnya tidak mengisolasi, melainkan mendekatkan. Melalui produk unggulan kami, <strong>SOSYA</strong>, kami menggabungkan kompleksitas algoritma pemesanan tiket dengan kehangatan interaksi media sosial.
+                        </p>
+                        <p>
+                            Hari ini, kami adalah rumah bagi para pemimpi, insinyur, dan pelancong yang bekerja tanpa lelah untuk memastikan setiap perjalanan Anda—baik di dunia maya maupun nyata—berjalan mulus.
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-slate-200">
+                        <div>
+                            <p class="text-3xl font-bold text-sosya-blue">50+</p>
+                            <p class="text-xs text-slate-400 font-medium uppercase mt-1">Talenta Digital</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-sosya-cyan">1M+</p>
+                            <p class="text-xs text-slate-400 font-medium uppercase mt-1">Pengguna Aktif</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-purple-500">24/7</p>
+                            <p class="text-xs text-slate-400 font-medium uppercase mt-1">Layanan Server</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-24">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-3xl font-bold text-slate-900">DNA Kami</h2>
+                    <p class="text-slate-500 mt-2">Nilai yang menggerakkan setiap baris kode yang kami tulis.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bento-card p-8 rounded-[2rem] hover:bg-blue-50 group" data-aos="fade-up" data-aos-delay="0">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-100 text-sosya-blue flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Inovasi Radikal</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">Kami tidak mengikuti tren. Kami menciptakan standar baru bagaimana aplikasi travel seharusnya bekerja.</p>
+                    </div>
+
+                    <div class="bento-card p-8 rounded-[2rem] hover:bg-cyan-50 group" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-12 h-12 rounded-2xl bg-cyan-100 text-sosya-cyan flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Manusia Sentris</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">Teknologi hanyalah alat. Fokus utama kami adalah pengalaman, emosi, dan kemudahan pengguna.</p>
+                    </div>
+
+                    <div class="bento-card p-8 rounded-[2rem] hover:bg-green-50 group" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-12 h-12 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Integritas Data</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">Keamanan data dan privasi pengguna adalah fondasi yang tidak bisa ditawar dalam ekosistem kami.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-10 bg-white/50 backdrop-blur-md border-t border-slate-200 mt-auto">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <p class="text-slate-500 text-sm font-medium">
+                &copy; 2025 PT ARTHA INTERKOM TEKNOLOGI. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, offset: 50, duration: 1000 });
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            
+            if (sidebar.classList.contains('translate-x-full')) {
+                sidebar.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden', 'opacity-0');
+                document.body.style.overflow = 'hidden';
+            } else {
+                sidebar.classList.add('translate-x-full');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => { overlay.classList.add('hidden'); }, 300);
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
+</body>
+</html>

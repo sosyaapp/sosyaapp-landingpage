@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pusat Bantuan - SOSYA</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* --- FONT SETUP (ZALANDO) --- */
+        @import url('https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap');
+
+        body {
+            font-family: 'Zalando Sans Expanded', sans-serif;
+            background-color: #F8FAFC;
+            color: #0f172a;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        :root {
+            --sosya-blue: #005EA8;
+            --sosya-cyan: #00AEEF;
+        }
+
+        /* --- MESH GRADIENT BACKGROUND --- */
+        .mesh-bg {
+            background-color: #ffffff;
+            background-image:
+                radial-gradient(at 0% 0%, hsla(206, 100%, 70%, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(190, 100%, 70%, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(206, 100%, 90%, 0.1) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(190, 100%, 90%, 0.1) 0px, transparent 50%);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #005EA8 0%, #00AEEF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bento-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -5px rgba(0, 94, 168, 0.1);
+            border-color: rgba(0, 174, 239, 0.3);
+        }
+
+        /* FAQ Accordion Styling */
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] summary ~ * {
+            animation: slideDown 0.3s ease-in-out;
+        }
+        @keyframes slideDown {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* SIDEBAR TRANSITION */
+        .sidebar-transition {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sosya: {
+                            blue: '#005EA8',
+                            cyan: '#00AEEF',
+                            dark: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="mesh-bg text-slate-800">
+
+    <nav class="fixed w-full z-50 bg-white/70 backdrop-blur-xl border-b border-white/40 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center relative">
+            
+            <a href="index.html" class="flex items-center gap-2">
+                <img src="images/SOSYA LOGO VERTICAL.png" alt="Logo SOSYA" class="h-6 md:h-8 w-auto object-contain">
+            </a>
+
+            <div class="hidden md:flex items-center space-x-1 font-medium text-sm text-slate-500 bg-slate-100/50 p-1 rounded-full border border-white/50 backdrop-blur-md absolute left-1/2 transform -translate-x-1/2">
+                <a href="index.html" class="px-5 py-2 rounded-full hover:bg-white hover:text-sosya-blue hover:shadow-sm transition-all duration-300">Beranda</a>
+                <a href="tentang.html" class="px-5 py-2 rounded-full hover:bg-white hover:text-sosya-blue hover:shadow-sm transition-all duration-300">Tentang</a>
+                <a href="bantuan.html" class="px-5 py-2 rounded-full bg-white text-sosya-blue shadow-sm transition-all duration-300">Pusat Bantuan</a>
+                <a href="#" class="px-5 py-2 rounded-full hover:bg-white hover:text-sosya-blue hover:shadow-sm transition-all duration-300">Guideline</a>
+            </div>
+
+            <div class="md:hidden">
+                <button onclick="toggleSidebar()" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 hover:bg-sosya-blue hover:text-white transition-all text-slate-700 shadow-sm border border-slate-200">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-[60] hidden opacity-0 md:hidden transition-opacity"></div>
+    <div id="sidebar" class="fixed top-0 right-0 h-full w-[280px] bg-white z-[70] shadow-2xl sidebar-transition translate-x-full flex flex-col border-l border-slate-100 md:hidden">
+        
+        <div class="p-6 flex justify-between items-center border-b border-slate-100">
+            <span class="font-bold text-lg text-sosya-blue">Menu</span>
+            <button onclick="toggleSidebar()" class="w-8 h-8 rounded-full bg-slate-50 text-slate-400 hover:text-red-500 flex items-center justify-center transition"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto py-6 px-6 flex flex-col gap-2">
+            <a href="index.html" class="block px-4 py-3 rounded-xl hover:bg-blue-50 text-slate-600 font-medium flex items-center gap-3">
+                <i class="fa-solid fa-house text-xs opacity-50 w-4"></i> Beranda
+            </a>
+            <a href="tentang.html" class="block px-4 py-3 rounded-xl hover:bg-blue-50 text-slate-600 font-medium flex items-center gap-3">
+                <i class="fa-solid fa-circle-info text-xs opacity-50 w-4"></i> Tentang
+            </a>
+            <a href="bantuan.html" class="block px-4 py-3 rounded-xl bg-blue-50 text-sosya-blue font-bold flex items-center gap-3">
+                <i class="fa-solid fa-life-ring text-xs opacity-50 w-4"></i> Pusat Bantuan
+            </a>
+            <a href="#" class="block px-4 py-3 rounded-xl hover:bg-blue-50 text-slate-600 font-medium flex items-center gap-3">
+                <i class="fa-solid fa-book-open text-xs opacity-50 w-4"></i> Guideline
+            </a>
+        </div>
+
+        <div class="p-6 bg-slate-50 border-t border-slate-100 text-center">
+             <p class="text-[10px] text-slate-400 font-medium mb-1">Supported By</p>
+             <p class="text-xs font-bold text-slate-800 uppercase tracking-wide">PT ARTHA INTERKOM TEKNOLOGI</p>
+        </div>
+    </div>
+
+    <header class="pt-32 pb-16 md:pt-44 md:pb-24 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-6 text-center" data-aos="fade-up">
+            <h1 class="text-3xl md:text-5xl font-bold text-slate-900 mb-6">
+                Ada yang bisa kami <span class="text-gradient">bantu?</span>
+            </h1>
+            
+            <div class="relative max-w-xl mx-auto group">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-200 to-cyan-200 rounded-full blur opacity-40 group-hover:opacity-60 transition duration-500"></div>
+                <div class="relative flex items-center bg-white rounded-full shadow-lg overflow-hidden border border-slate-200 focus-within:border-sosya-blue focus-within:ring-4 focus-within:ring-blue-100 transition-all">
+                    <span class="pl-6 text-slate-400"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <input type="text" id="searchInput" onkeyup="filterFAQ()" placeholder="Cari kendala (contoh: refund, lupa password)..." class="w-full py-4 px-4 outline-none text-slate-700 bg-transparent placeholder-slate-400">
+                    <button onclick="filterFAQ()" class="bg-slate-900 text-white px-6 py-2 m-2 rounded-full text-sm font-bold hover:bg-sosya-blue transition">Cari</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="pb-24 flex-grow">
+        <div class="max-w-6xl mx-auto px-6">
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+                <div class="bento-card p-6 rounded-3xl text-center group hover:bg-blue-50 cursor-pointer" onclick="filterByTopic('akun')">
+                    <div class="w-12 h-12 mx-auto bg-blue-100 text-sosya-blue rounded-full flex items-center justify-center text-xl mb-3 group-hover:scale-110 transition"><i class="fa-solid fa-user-shield"></i></div>
+                    <h3 class="font-bold text-slate-800">Akun & Keamanan</h3>
+                </div>
+                <div class="bento-card p-6 rounded-3xl text-center group hover:bg-cyan-50 cursor-pointer" onclick="filterByTopic('travel')">
+                    <div class="w-12 h-12 mx-auto bg-cyan-100 text-sosya-cyan rounded-full flex items-center justify-center text-xl mb-3 group-hover:scale-110 transition"><i class="fa-solid fa-plane-circle-check"></i></div>
+                    <h3 class="font-bold text-slate-800">Tiket & Travel</h3>
+                </div>
+                <div class="bento-card p-6 rounded-3xl text-center group hover:bg-purple-50 cursor-pointer" onclick="filterByTopic('refund')">
+                    <div class="w-12 h-12 mx-auto bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-xl mb-3 group-hover:scale-110 transition"><i class="fa-solid fa-wallet"></i></div>
+                    <h3 class="font-bold text-slate-800">Refund & Bayar</h3>
+                </div>
+                <div class="bento-card p-6 rounded-3xl text-center group hover:bg-orange-50 cursor-pointer" onclick="filterByTopic('sosial')">
+                    <div class="w-12 h-12 mx-auto bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-xl mb-3 group-hover:scale-110 transition"><i class="fa-solid fa-comments"></i></div>
+                    <h3 class="font-bold text-slate-800">Sosial & Feed</h3>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-10">
+                <div class="md:col-span-1" data-aos="fade-right">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">Yang Sering Ditanyain</h2>
+                    <p class="text-slate-500 text-sm mb-6">Pertanyaan paling populer minggu ini dari para Traveler SOSYA.</p>
+                    
+                    <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-6 text-white shadow-xl relative overflow-hidden">
+                        <i class="fa-solid fa-headset absolute -bottom-5 -right-5 text-8xl text-white/5"></i>
+                        <h3 class="font-bold text-lg mb-2">Masih bingung?</h3>
+                        <p class="text-slate-300 text-xs mb-4">Tim CS kami siap bantuin kamu 24/7. Gak pake bot, beneran manusia.</p>
+                        <button class="w-full py-3 bg-white text-slate-900 rounded-xl font-bold text-sm hover:bg-blue-50 transition">Chat Support</button>
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 space-y-4" id="faqList" data-aos="fade-left">
+                    <div id="noResults" class="hidden text-center py-10 bg-slate-50 rounded-2xl border border-dashed border-slate-300">
+                        <i class="fa-solid fa-face-frown text-3xl text-slate-300 mb-2"></i>
+                        <p class="text-slate-500">Yah, pencarian tidak ditemukan.</p>
+                        <button onclick="resetFilter()" class="text-sosya-blue text-sm font-bold mt-2 underline">Tampilkan Semua</button>
+                    </div>
+
+                    <details class="faq-item group bg-white border border-slate-100 rounded-2xl p-4 [&_summary::-webkit-details-marker]:hidden cursor-pointer shadow-sm hover:shadow-md transition duration-300" data-tags="travel refund tiket">
+                        <summary class="flex items-center justify-between font-bold text-slate-800 group-hover:text-sosya-blue transition">
+                            Gimana cara refund tiket pesawat?
+                            <span class="text-slate-400 group-open:rotate-180 transition"><i class="fa-solid fa-chevron-down"></i></span>
+                        </summary>
+                        <p class="text-slate-500 text-sm mt-3 leading-relaxed border-t border-slate-100 pt-3">
+                            Tenang, gampang kok. Buka menu <strong>"My Booking"</strong> di mode Travel, pilih tiket yang mau dibatalin, terus klik tombol <strong>"Ajukan Refund"</strong>. Dana bakal balik ke saldo SOSYAPay kamu dalam 1x24 jam (tergantung kebijakan maskapai ya).
+                        </p>
+                    </details>
+
+                    <details class="faq-item group bg-white border border-slate-100 rounded-2xl p-4 [&_summary::-webkit-details-marker]:hidden cursor-pointer shadow-sm hover:shadow-md transition duration-300" data-tags="sosial lingkaran komunitas">
+                        <summary class="flex items-center justify-between font-bold text-slate-800 group-hover:text-sosya-blue transition">
+                            Apa itu fitur "Lingkaran"?
+                            <span class="text-slate-400 group-open:rotate-180 transition"><i class="fa-solid fa-chevron-down"></i></span>
+                        </summary>
+                        <p class="text-slate-500 text-sm mt-3 leading-relaxed border-t border-slate-100 pt-3">
+                            Lingkaran adalah forum komunitas berbasis lokasi. Kamu cuma bisa gabung dan ngobrol di Lingkaran Bali kalau GPS kamu beneran kedeteksi di Bali. Ini cara kami ngejaga review biar 100% asli dari orang yang beneran di sana.
+                        </p>
+                    </details>
+
+                    <details class="faq-item group bg-white border border-slate-100 rounded-2xl p-4 [&_summary::-webkit-details-marker]:hidden cursor-pointer shadow-sm hover:shadow-md transition duration-300" data-tags="akun keamanan password login">
+                        <summary class="flex items-center justify-between font-bold text-slate-800 group-hover:text-sosya-blue transition">
+                            Akun saya terkunci, harus gimana?
+                            <span class="text-slate-400 group-open:rotate-180 transition"><i class="fa-solid fa-chevron-down"></i></span>
+                        </summary>
+                        <p class="text-slate-500 text-sm mt-3 leading-relaxed border-t border-slate-100 pt-3">
+                            Keamanan nomor satu! Kalau salah password 5 kali, akun otomatis kekunci demi keamanan. Cek email kamu, kami udah kirim link buat reset password. Kalau gak ada email masuk, langsung kontak CS ya.
+                        </p>
+                    </details>
+
+                    <details class="faq-item group bg-white border border-slate-100 rounded-2xl p-4 [&_summary::-webkit-details-marker]:hidden cursor-pointer shadow-sm hover:shadow-md transition duration-300" data-tags="sosial feed itinerary copy">
+                        <summary class="flex items-center justify-between font-bold text-slate-800 group-hover:text-sosya-blue transition">
+                            Cara copy itinerary teman gimana?
+                            <span class="text-slate-400 group-open:rotate-180 transition"><i class="fa-solid fa-chevron-down"></i></span>
+                        </summary>
+                        <p class="text-slate-500 text-sm mt-3 leading-relaxed border-t border-slate-100 pt-3">
+                            Liat postingan liburan teman yang ada icon ✈️-nya? Klik aja fotonya, nanti muncul detail "Trip Info". Di situ ada tombol <strong>"Copy to My Plan"</strong>. Otomatis masuk ke wishlist kamu deh.
+                        </p>
+                    </details>
+
+                    <details class="faq-item group bg-white border border-slate-100 rounded-2xl p-4 [&_summary::-webkit-details-marker]:hidden cursor-pointer shadow-sm hover:shadow-md transition duration-300" data-tags="bayar payment metode">
+                        <summary class="flex items-center justify-between font-bold text-slate-800 group-hover:text-sosya-blue transition">
+                            Metode pembayaran apa saja yang tersedia?
+                            <span class="text-slate-400 group-open:rotate-180 transition"><i class="fa-solid fa-chevron-down"></i></span>
+                        </summary>
+                        <p class="text-slate-500 text-sm mt-3 leading-relaxed border-t border-slate-100 pt-3">
+                            Kami menerima Transfer Bank, Kartu Kredit, E-Wallet (Gopay, OVO, Dana), dan tentu saja SOSYAPay untuk transaksi yang lebih cepat.
+                        </p>
+                    </details>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="py-10 bg-white/50 backdrop-blur-md border-t border-slate-200 mt-auto">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <p class="text-slate-500 text-sm font-medium">
+                Supported By <span class="text-slate-900 font-bold uppercase tracking-wide">PT ARTHA INTERKOM TEKNOLOGI</span>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, offset: 50, duration: 1000 });
+
+        // Sidebar Toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            
+            if (sidebar.classList.contains('translate-x-full')) {
+                sidebar.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden', 'opacity-0');
+                document.body.style.overflow = 'hidden';
+            } else {
+                sidebar.classList.add('translate-x-full');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => { overlay.classList.add('hidden'); }, 300);
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // --- SEARCH FUNCTIONALITY ---
+        function filterFAQ() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const faqItems = document.getElementsByClassName('faq-item');
+            const noResults = document.getElementById('noResults');
+            let hasResults = false;
+
+            for (let i = 0; i < faqItems.length; i++) {
+                const summary = faqItems[i].querySelector('summary').innerText.toLowerCase();
+                const content = faqItems[i].querySelector('p').innerText.toLowerCase();
+                const tags = faqItems[i].getAttribute('data-tags') || "";
+
+                if (summary.includes(filter) || content.includes(filter) || tags.includes(filter)) {
+                    faqItems[i].style.display = ""; // Show
+                    hasResults = true;
+                } else {
+                    faqItems[i].style.display = "none"; // Hide
+                }
+            }
+
+            // Show/Hide "No Results" message
+            if (hasResults) {
+                noResults.classList.add('hidden');
+            } else {
+                noResults.classList.remove('hidden');
+            }
+        }
+
+        // Quick Topic Filter
+        function filterByTopic(topic) {
+            const input = document.getElementById('searchInput');
+            input.value = topic; // Set search bar text
+            filterFAQ(); // Trigger search
+            
+            // Optional: Scroll to results
+            document.getElementById('faqList').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetFilter() {
+             const input = document.getElementById('searchInput');
+             input.value = "";
+             filterFAQ();
+        }
+    </script>
+</body>
+</html>
