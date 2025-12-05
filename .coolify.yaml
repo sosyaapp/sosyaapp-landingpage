@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  sosya-landing:
+    image: sosya-landing:latest
+    ports:
+      - "80:80"
+    container_name: sosya-landing
+    restart: always
+    environment:
+      - NODE_ENV=production
+    networks:
+      - coolify
